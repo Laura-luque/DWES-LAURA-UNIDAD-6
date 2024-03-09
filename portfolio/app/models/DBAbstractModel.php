@@ -1,4 +1,5 @@
 <?php
+namespace App\Models;
 abstract class DBAbstractModel
 {
     private static $db_host = DBHOST;
@@ -24,16 +25,16 @@ abstract class DBAbstractModel
     {
         $dsn = 'mysql:host=' . self::$db_host . ';' . 'dbname=' . self::$db_name . ';' . 'port=' . self::$db_port;
         try {
-            $this->conn = new PDO(
+            $this->conn = new \PDO(
                 $dsn,
                 self::$db_user,
                 self::$db_pass,
                 //Se puede incluir BUFFERED_QUERY
-                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+                array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
             );
 
             return $this->conn;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             printf("Conexión fallida: %s\n", $e->getMessage());
             exit();
         }
@@ -65,9 +66,9 @@ abstract class DBAbstractModel
             if (!$_stmt->execute()) {
                 printf("Error de consulta: %s\n", $_stmt->errorInfo()[2]);
             }
-            $this->rows = $_stmt->fetchAll(PDO::FETCH_ASSOC);
+            $this->rows = $_stmt->fetchAll(\PDO::FETCH_ASSOC);
             $_stmt->closeCursor();
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             printf("Error en consulta: %s\n", $e->getMessage());
         }
     }

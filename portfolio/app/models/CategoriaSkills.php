@@ -1,7 +1,8 @@
 <?php
+namespace App\Models;
 require_once("DBAbstractModel.php");
 
-class CategoriaSkill extends DBAbstractModel
+class CategoriaSkills extends DBAbstractModel
 {
     private static $instancia;
     public static function getInstancia()
@@ -30,25 +31,18 @@ class CategoriaSkill extends DBAbstractModel
         return $this->mensaje;
     }
 
-    public function set() {
+    public function set() {}
 
+    public function get($id = '') {}
+
+    public function edit() {}
+
+    public function delete() {}
+
+    public function getAll()
+    {
+        $this->query = "SELECT * FROM categorias_skills";
+        $this->get_results_from_query();
+        return $this->rows;
     }
-
-    public function get() {
-
-    }
-
-    public function edit() {
-
-    }
-
-    public function delete() {
-
-    }
-
-
 }
-
-
-
-?>
